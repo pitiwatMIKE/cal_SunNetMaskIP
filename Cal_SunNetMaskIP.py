@@ -134,16 +134,14 @@ def subNet(ip, prefix1, prefix2, dataIP, indexOfDataIP=0, indentation=0):
                     broadcast = calSubnetIp(ip, prefix1, prefix2, i)['broadcast']
                     firstIP = calSubnetIp(ip, prefix1, prefix2, i)['firstIP']
                     lastIP = calSubnetIp(ip, prefix1, prefix2, i)['lastIP']
-                    print("{}{:4}: {:12}\t={:4}".format("\t"*indentation,
-                          i, network, numberHostIP[indexOfDataIP]))
-                    tableSubNetIP.append((numberHostIP[indexOfDataIP], network, broadcast, firstIP, lastIP, prefix2, calNetMask(
-                        prefix2)))  # createTable SunNetIP
+                    print("{}{:4}: {:12}\t={:4}".format("\t"*indentation,i, network, numberHostIP[indexOfDataIP]))
+                    tableSubNetIP.append((numberHostIP[indexOfDataIP], network, broadcast, firstIP, lastIP, prefix2, calNetMask(prefix2)))  # createTable SunNetIP
                     indexOfDataIP += 1
                 else:
                     # ต้องหาค่าผลต่างของ Prefix ก่อนเพื่อดักการทำ subnet ของ router เช่น 29-30 ได้ 1bit ซึ่งไม่ถูกต้องเพราะ router ต้องการ 2bit
                     if (abs(prefix2 - dataIP[indexOfDataIP][0]) > 1):
                         indentation += 1
-                        print("---"*50)
+                        print("--"*60)
                         network = calSubnetIp(ip, prefix1, prefix2, i)['network']
                         indexOfDataIP = subNet(network, prefix2, dataIP[indexOfDataIP][0], dataIP, indexOfDataIP, indentation)
                         indentation -= 1
